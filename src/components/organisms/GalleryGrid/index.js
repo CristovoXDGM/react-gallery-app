@@ -9,20 +9,18 @@ export default function GalleryGrid({ textToSearch }) {
 
   const api_key = "f6437baea00a6f11feec089d6c34679b";
 
-  const baseUrl = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${textToSearch}&per_page=21&format=json&nojsoncallback=1`;
-
-  async function loadSearchImages() {
-    try {
-      setLoading(true);
-      var response = await axios.get(baseUrl);
-      setImages(response.data.photos.photo);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   React.useEffect(() => {
+    const baseUrl = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${textToSearch}&per_page=21&format=json&nojsoncallback=1`;
+    async function loadSearchImages() {
+      try {
+        setLoading(true);
+        var response = await axios.get(baseUrl);
+        setImages(response.data.photos.photo);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
     loadSearchImages();
   }, [textToSearch]);
 
