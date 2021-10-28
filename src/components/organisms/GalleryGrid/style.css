@@ -5,14 +5,14 @@
   object-fit: cover;
 }
 
-.moldureLimits {
+.frameLimits {
   display: flex;
   flex-flow: row wrap;
   overflow-y: scroll;
   justify-content: center;
   align-items: center;
 }
-.moldure {
+.frame {
   margin: 2%;
   width: 300px;
   height: 300px;
@@ -20,7 +20,7 @@
 
   transition: width 1s, height 1s, transform 1s;
 }
-.moldure:hover {
+.frame:hover {
   transform: scale(1.5);
   z-index: 2;
   position: relative;

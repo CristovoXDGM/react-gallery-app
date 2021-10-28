@@ -6,7 +6,8 @@ import "./style.css";
 export default function GalleryGrid({ textToSearch }) {
   const [images, setImages] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-
+  const textToSearchEmpty =
+    textToSearch === "" || textToSearch == null || textToSearch === undefined;
   const api_key = "f6437baea00a6f11feec089d6c34679b";
 
   React.useEffect(() => {
@@ -16,21 +17,22 @@ export default function GalleryGrid({ textToSearch }) {
         setLoading(true);
         var response = await axios.get(baseUrl);
         setImages(response.data.photos.photo);
+
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     }
     loadSearchImages();
-  }, [textToSearch]);
+  }, [textToSearch, images.length]);
 
   return (
     <>
       {!loading ? (
-        <section className="moldureLimits">
+        <section className="frameLimits">
           {images.map((map) => {
             return (
-              <div className="moldure">
+              <div className="frame">
                 <img
                   className="images"
                   alt={map.id}
@@ -41,7 +43,13 @@ export default function GalleryGrid({ textToSearch }) {
           })}
         </section>
       ) : (
-        <img src={Loading} height="100px" alt="loading" />
+        <>
+          {textToSearchEmpty ? (
+            <h1>Please search for something</h1>
+          ) : (
+            <img src={Loading} height="100px" alt="loading" />
+          )}
+        </>
       )}
     </>
   );

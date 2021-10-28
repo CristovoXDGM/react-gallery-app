@@ -24,3 +24,9 @@
   flex-direction: column;
   overflow-y: scroll;
 }
+
+@media screen and (max-width: 600px) {
+  .buttonsList {
+    display: none;
+  }
+}
